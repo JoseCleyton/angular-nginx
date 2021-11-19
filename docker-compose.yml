@@ -1,0 +1,22 @@
+
+version: "3.7"
+services:
+  app-angular:
+    container_name: app-angular
+    build:
+      context: ./angular-nginx
+
+  app-home:
+    container_name: app-home
+    build:
+      context: ./angular-home
+
+  orchestrator:
+    container_name: orchestrator
+    ports:
+      - 3000:80
+    depends_on:
+      - app-angular
+      - app-home
+    build:
+      context: .
